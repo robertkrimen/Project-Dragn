@@ -41,6 +41,23 @@ ul li {
     clear: both;
 }
 
-.selected {
+#tag-list li {
+    border: 2px solid #fff;
+    padding: 2px;
+}
+
+#tag-list li.highlight {
+    background-color: #ffd;
+}
+
+#tag-list li.selected a {
     font-weight: bold;
+}
+
+#tag-list li.highlight-over {
+    border: 2px solid #aaa;
+}
+
+.tag-list-count {
+    color: #aaa;
 }

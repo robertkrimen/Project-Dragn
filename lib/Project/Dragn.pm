@@ -34,7 +34,7 @@ sub _build_model {
     my $self = shift;
     my $bdb_file = $self->bdb_file;
     $bdb_file->parent->mkpath unless -d $bdb_file;
-    my $model = KiokuDB->connect( "bdb:dir=$bdb_file", create => 1 );
+    my $model = Project::Dragn::Model->connect( "bdb:dir=$bdb_file", create => 1 );
     $self->model_scope( $model->new_scope );
     $model;
 }
@@ -62,7 +62,7 @@ sub home_dir {
 
 sub populate {
     my $self = shift;
-    Project::Dragn::Model->populate( $self );
+    $self->model->populate( $self );
 }
 
 =head1 AUTHOR

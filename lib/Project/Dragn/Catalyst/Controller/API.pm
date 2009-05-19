@@ -8,7 +8,7 @@ use parent 'Catalyst::Controller::REST';
 use Carp;
 
 my @item = qw/apple banana cherry grape/;
-#my @collection = qw/Favorites Shiny Pretty Ugly/;
+#my @tag = qw/Favorites Shiny Pretty Ugly/;
 
 sub fresh :Path('fresh') {
     my ( $self, $ctx ) = @_;
@@ -23,37 +23,37 @@ sub fresh :Path('fresh') {
     );
 }
 
-sub collection_list :Path('collection/list') {
+sub tag_list :Path('tag/list') {
     my ( $self, $ctx ) = @_;
 
-    my @collection = map { $_->name } $ctx->model( 'Dragn' )->model->lookup( "dragn" )->collection->members;
+    my @tag = $ctx->model( 'Dragn' )->model->lookup( "dragn" )->tags->members;
 
     $self->status_ok( 
         $ctx,
         entity => {
-            list => [ @collection ],
+            list => [ map { { name => $_->name, count => $_->count } } @tag ],
         },
     );
 }
 
-sub collection :Chained('/') :PathPart('api/collection') :CaptureArgs(1) {
+sub tag :Chained('/') :PathPart('api/tag') :CaptureArgs(1) {
     my ( $self, $ctx ) = @_;
 
     my $name = $ctx->request->captures->[0];
-    my $collection = $ctx->model( 'Dragn' )->model->lookup( "collection-$name" ) or croak "Couldn't find collection \"$name\"";
+    my $tag = $ctx->model( 'Dragn' )->model->lookup( "tag-$name" ) or croak "Couldn't find tag \"$name\"";
 
     $ctx->stash(
-        collection => $collection,
+        tag => $tag,
     );
 }
 
-sub collection_item_list :Chained('collection') :PathPart('item/list') {
+sub tag_item_list :Chained('tag') :PathPart('item/list') {
     my ( $self, $ctx ) = @_;
 
     $self->status_ok( 
         $ctx,
         entity => {
-            list => [ map { $_->name } $ctx->stash->{collection}->children->members ], # TODO Should be TO_JSON or sumptin
+            list => [ map { $_->name } $ctx->stash->{tag}->tagged->members ], # TODO Should be TO_JSON or sumptin
         },
     );
 }
@@ -73,6 +73,19 @@ sub item_thumbnail :Chained('item') :PathPart('thumbnail.jpg') :Args(0) {
     my ( $self, $ctx ) = @_;
     my $name = $ctx->request->captures->[0];
     $ctx->serve_static_file( $ctx->path_to( qw/assets data/, $name, qw/thumbnail.jpg/ ) );
+}
+
+sub item_add_tag :Chained('item') :PathPart('add-tag') :Args(0) {
+    my ( $self, $ctx ) = @_;
+    my $name = $ctx->request->captures->[0];
+    my $item = $ctx->model( 'Dragn' )->model->item( $name );
+    my $tag = $ctx->model( 'Dragn' )->model->tag( $ctx->request->param( 'tag' ) );
+    $item->add_tag( $tag );
+
+    $self->status_ok( 
+        $ctx,
+        entity => {},
+    );
 }
 
 

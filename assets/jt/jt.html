@@ -1,7 +1,7 @@
 [% BLOCK applet %]
 <div class="applet yui-gf">
     <div class="yui-u first">
-        <ul id="collection-list">
+        <ul id="tag-list">
         </ul>
     </div>
     <div class="yui-u">
@@ -20,14 +20,14 @@
 [% END %]
 
 [% BLOCK item_list_item %]
-<li id="item-list-item-[% name %]">
+<li id="item-list--[% name %]">
     <img src="[% uri %]/item/[% name %]/thumbnail.jpg">
 </li>
 [% END %]
 
-[% BLOCK collection_list_item %]
-<li>
-    <a href="#collection/[% name %]"><span id="collection-list-item-[% name %]" class="collection-list-item" >[% name %]</span></a>
+[% BLOCK tag_list_item %]
+<li id="tag-list--[% tag.name %]" class="tag-list-item">
+    <a id="tag-list-a--[% tag.name %]" href="#tag/[% tag.name %]">[% tag.name %]</a> <span class="tag-list-count">([% tag.count %])</span>
 </li>
 [% END %]
 

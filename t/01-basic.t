@@ -13,11 +13,26 @@ ok( my $dragn = Project::Dragn->new );
 
 $dragn->populate;
 
-my $collection = $dragn->model->lookup( "collection-Favorites" );
-ok( $collection );
-is( $collection->name, "Favorites" );
+my $tag;
+$tag = $dragn->model->tag( 'Favorite' );
+ok( $tag );
+is( $tag->name, "Favorite" );
+is( $tag->count, 0 );
 
 my $_dragn = $dragn->model->lookup( "dragn" );
-ok( $_dragn->collection->has( $collection ) );
+ok( $_dragn->tags->has( $tag ) );
 
-1;
+$tag = $dragn->model->tag( 'All' );
+ok( $tag );
+is( $tag->name, "All" );
+is( $tag->count, 4 );
+
+#1;
+#my $collection = $dragn->model->lookup( "collection-Favorites" );
+#ok( $collection );
+#is( $collection->name, "Favorites" );
+
+#my $_dragn = $dragn->model->lookup( "dragn" );
+#ok( $_dragn->collection->has( $collection ) );
+
+#1;
