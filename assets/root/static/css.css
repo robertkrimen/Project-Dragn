@@ -26,6 +26,16 @@ a:hover {
 
 ul li {
     list-style-type: none;
+    margin: 0;
+}
+
+ul {
+    margin: 0;
+}
+
+#nuke {
+    margin-top: 1em;
+    padding: 4px;
 }
 
 #item-list li {

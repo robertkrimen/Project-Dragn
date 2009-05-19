@@ -7,7 +7,7 @@ use Moose;
 
 extends qw/KiokuDB/;
 
-our @item = qw/apple banana cherry grape/;
+our @item = qw/apple banana cherry grape mango watermelon/;
 our @tag = qw/Favorite Shiny Pretty Ugly/;
 
 sub tag {
@@ -36,7 +36,7 @@ sub populate {
     }
     
     {
-        my $object = $dragn->model->lookup( 'dragn' );
+        my $object = $self->lookup( 'dragn' );
         unless ($object) {
             $object = Project::Dragn::Model::Dragn->new();
             $dragn->model->store( 'dragn' => $object );
@@ -46,6 +46,14 @@ sub populate {
         }
     }
 
+}
+
+sub nuke {
+    my $self = shift;
+    my $object = $self->lookup( 'dragn' );
+    for my $tag ($object->tags->members) {
+        $tag->nuke;
+    }
 }
 
 package Project::Dragn::Model::Dragn;
@@ -96,6 +104,13 @@ sub _build_tagged {
     return set;
 }
 
+sub nuke {
+    my $self = shift;
+    for my $tagged ($self->tagged->members) {
+        $tagged->remove_tag( $self );
+    }
+}
+
 package Project::Dragn::Model::Item;
 
 use Moose;
@@ -133,6 +148,13 @@ sub add_tag {
     my $tag = shift;
     $self->tags->insert( $tag );
     $tag->tagged->insert( $self );
+}
+
+sub remove_tag {
+    my $self = shift;
+    my $tag = shift;
+    $self->tags->remove( $tag );
+    $tag->tagged->remove( $self );
 }
 
 1;

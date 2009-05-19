@@ -24,6 +24,16 @@ Test::Most
 _END_
 
     map { my ($pk, $vr) = split m/\s/; requires $pk => $vr || 0 } grep { ! /^\s*#/ } split m/\n/, <<_END_;
+Catalyst::Runtime 5.8000
+Catalyst::Controller::REST
+Catalyst::View::TT
+File::Assets
+KiokuDB
+KiokuDB::Backend::BDB
+Moose
+Path::Class
+Path::Mapper
+URI::PathAbstract
 _END_
 }
 

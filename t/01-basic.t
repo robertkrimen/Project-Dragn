@@ -25,7 +25,7 @@ ok( $_dragn->tags->has( $tag ) );
 $tag = $dragn->model->tag( 'All' );
 ok( $tag );
 is( $tag->name, "All" );
-is( $tag->count, 4 );
+cmp_ok( $tag->count, '>', 4 );
 
 #1;
 #my $collection = $dragn->model->lookup( "collection-Favorites" );

@@ -26,7 +26,7 @@ jemplate:
 	jemplate --runtime=jquery --compile jt/* > assets/root/static/jemplate.js
 
 data:
-	for datum in apple banana cherry grape; do \
+	for datum in apple banana cherry grape mango watermelon; do \
 		mkdir -p assets/data/$$datum; \
 		convert source/$$datum.jpg assets/data/$$datum/image.jpg; \
 		convert source/$$datum.jpg -resize '128x128>' assets/data/$$datum/thumbnail.jpg; \

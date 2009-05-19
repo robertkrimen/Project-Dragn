@@ -1,26 +1,9 @@
 NAME
-    Project::Dragn - The great new Project::Dragn!
+    Project::Dragn -
 
 VERSION
     Version 0.01
 
-SYNOPSIS
-    Quick summary of what the module does.
-
-    Perhaps a little code snippet.
-
-        use Project::Dragn;
-
-        my $foo = Project::Dragn->new();
-        ...
-
-EXPORT
-    A list of functions that can be exported. You can delete this section if
-    you don't export anything, such as for a purely object-oriented module.
-
-FUNCTIONS
-  function1
-  function2
 AUTHOR
     Robert Krimen, "<rkrimen at cpan.org>"
 

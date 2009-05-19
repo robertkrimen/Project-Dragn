@@ -3,15 +3,18 @@
     <div class="yui-u first">
         <ul id="tag-list">
         </ul>
+
+        <button id="nuke">Nuke!</button>
+
     </div>
     <div class="yui-u">
-        <div id="toolbar">
-            <span id="copy-into">
-            </span>
-            <span id="move-into">
-            </span>
-            <button id="remove">Remove</button>
-        </div>
+<!--        <div id="toolbar">-->
+<!--            <span id="copy-into">-->
+<!--            </span>-->
+<!--            <span id="move-into">-->
+<!--            </span>-->
+<!--            <button id="remove">Remove</button>-->
+<!--        </div>-->
         <ul id="item-list">
         </ul>
         <div class="clear"></div>
@@ -27,7 +30,7 @@
 
 [% BLOCK tag_list_item %]
 <li id="tag-list--[% tag.name %]" class="tag-list-item">
-    <a id="tag-list-a--[% tag.name %]" href="#tag/[% tag.name %]">[% tag.name %]</a> <span class="tag-list-count">([% tag.count %])</span>
+    <a id="tag-list-a--[% tag.name %]" href="#tag/[% tag.name %]">[% tag.name %]</a> [% IF tag.count != '-' %]<span class="tag-list-count">([% tag.count %])</span>[% END %]
 </li>
 [% END %]
 

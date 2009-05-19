@@ -47,6 +47,18 @@ sub tag :Chained('/') :PathPart('api/tag') :CaptureArgs(1) {
     );
 }
 
+sub nuke :Local {
+    my ( $self, $ctx ) = @_;
+
+    $ctx->model( 'Dragn' )->model->nuke;
+
+    $self->status_ok( 
+        $ctx,
+        entity => {
+        },
+    );
+}
+
 sub tag_item_list :Chained('tag') :PathPart('item/list') {
     my ( $self, $ctx ) = @_;
 

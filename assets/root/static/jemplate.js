@@ -878,7 +878,7 @@ Jemplate.templateMap['applet'] = function(context) {
     var output = '';
 
     try {
-output += '\n<div class="applet yui-gf">\n    <div class="yui-u first">\n        <ul id="tag-list">\n        </ul>\n    </div>\n    <div class="yui-u">\n        <div id="toolbar">\n            <span id="copy-into">\n            </span>\n            <span id="move-into">\n            </span>\n            <button id="remove">Remove</button>\n        </div>\n        <ul id="item-list">\n        </ul>\n        <div class="clear"></div>\n    </div>\n</div>\n';
+output += '\n<div class="applet yui-gf">\n    <div class="yui-u first">\n        <ul id="tag-list">\n        </ul>\n\n        <button id="nuke">Nuke!</button>\n\n    </div>\n    <div class="yui-u">\n<!--        <div id="toolbar">-->\n<!--            <span id="copy-into">-->\n<!--            </span>-->\n<!--            <span id="move-into">-->\n<!--            </span>-->\n<!--            <button id="remove">Remove</button>-->\n<!--        </div>-->\n        <ul id="item-list">\n        </ul>\n        <div class="clear"></div>\n    </div>\n</div>\n';
     }
     catch(e) {
         var error = context.set_error(e, output);
@@ -895,13 +895,13 @@ Jemplate.templateMap['item_list_item'] = function(context) {
 
     try {
 output += '\n<li id="item-list--';
-//line 23 "jt.html"
+//line 26 "jt.html"
 output += stash.get('name');
 output += '">\n    <img src="';
-//line 24 "jt.html"
+//line 27 "jt.html"
 output += stash.get('uri');
 output += '/item/';
-//line 24 "jt.html"
+//line 27 "jt.html"
 output += stash.get('name');
 output += '/thumbnail.jpg">\n</li>\n';
     }
@@ -920,21 +920,27 @@ Jemplate.templateMap['tag_list_item'] = function(context) {
 
     try {
 output += '\n<li id="tag-list--';
-//line 29 "jt.html"
+//line 32 "jt.html"
 output += stash.get(['tag', 0, 'name', 0]);
 output += '" class="tag-list-item">\n    <a id="tag-list-a--';
-//line 30 "jt.html"
+//line 33 "jt.html"
 output += stash.get(['tag', 0, 'name', 0]);
 output += '" href="#tag/';
-//line 30 "jt.html"
+//line 33 "jt.html"
 output += stash.get(['tag', 0, 'name', 0]);
 output += '">';
-//line 30 "jt.html"
+//line 33 "jt.html"
 output += stash.get(['tag', 0, 'name', 0]);
-output += '</a> <span class="tag-list-count">(';
-//line 30 "jt.html"
+output += '</a> ';
+//line 33 "jt.html"
+if (stash.get(['tag', 0, 'count', 0]) != '-') {
+output += '<span class="tag-list-count">(';
+//line 33 "jt.html"
 output += stash.get(['tag', 0, 'count', 0]);
-output += ')</span>\n</li>\n';
+output += ')</span>';
+}
+
+output += '\n</li>\n';
     }
     catch(e) {
         var error = context.set_error(e, output);
@@ -951,13 +957,13 @@ Jemplate.templateMap['toolbar_select'] = function(context) {
 
     try {
 output += '\n    <select id="';
-//line 35 "jt.html"
+//line 38 "jt.html"
 output += stash.get('id');
 output += '">\n        <option name="">';
-//line 36 "jt.html"
+//line 39 "jt.html"
 output += stash.get('name');
 output += '</option>\n        ';
-//line 39 "jt.html"
+//line 42 "jt.html"
 
 // FOREACH 
 (function() {
@@ -973,10 +979,10 @@ output += '</option>\n        ';
         while (! done) {
             stash.data['option'] = value;
 output += '\n        <option name="';
-//line 38 "jt.html"
+//line 41 "jt.html"
 output += stash.get('option');
 output += '">';
-//line 38 "jt.html"
+//line 41 "jt.html"
 output += stash.get('option');
 output += '</option>\n        ';;
             retval = list.get_next();
