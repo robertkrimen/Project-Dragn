@@ -1,0 +1,35 @@
+body {
+    font-family: Verdana, Arial, sans-serif;
+    background-color: #fff;
+}
+
+a, a:hover, a:active, a:visited {
+    text-decoration: none;
+    font-weight: bold;
+    font-weight: normal;
+    color: #436b95;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.applet {
+    border: 1px dotted #7ad;
+    padding: 4px;
+}
+
+#toolbar {
+    background-color: #acf;
+    padding: 2px;
+}
+
+#item-list li {
+    float: left;
+    list-style-type: none;
+    padding: 1em;
+}
+
+.clear {
+    clear: both;
+}

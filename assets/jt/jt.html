@@ -1,0 +1,30 @@
+[% BLOCK applet %]
+<div class="applet">
+    <div id="toolbar">
+        <span id="copy-into">
+        </span>
+        <span id="move-into">
+        </span>
+        <button id="remove">Remove</button>
+    </div>
+    <ul id="item-list">
+    </ul>
+    <div class="clear"></div>
+</div>
+[% END %]
+
+[% BLOCK item_list_item %]
+<li>
+    <img src="[% uri %]/item/[% name %]/thumbnail.jpg">
+</li>
+[% END %]
+
+[% BLOCK toolbar_select %]
+    <select id="[% id %]">
+        <option name="">[% name %]</option>
+        [% FOREACH option = options %]
+        <option name="[% option %]">[% option %]</option>
+        [% END %]
+        <option name="_new_">New...</option>
+    </select>
+[% END %]

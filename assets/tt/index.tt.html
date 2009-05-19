@@ -1,0 +1,17 @@
+[% javascript = BLOCK %]
+<script>
+$(document).ready( function() {
+    applet( "[% Catalyst.uri_for( '/api' ) %]" );
+} );
+</script>
+[% END %]
+[% assets.include( "static/jemplate.js" ) %]
+[% assets.include( "static/js.js" ) %]
+[% assets.include( javascript ) %]
+
+[% CLEAR %]
+[% WRAPPER frame.tt.html %]
+
+<div id="applet"></div>
+
+[% END %]
