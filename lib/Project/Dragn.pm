@@ -5,7 +5,7 @@ use strict;
 
 =head1 NAME
 
-Project::Dragn - The great new Project::Dragn!
+Project::Dragn -
 
 =head1 VERSION
 
@@ -15,37 +15,54 @@ Version 0.01
 
 our $VERSION = '0.01';
 
+use Moose;
 
-=head1 SYNOPSIS
+use Project::Dragn::Model;
 
-Quick summary of what the module does.
+use Path::Class;
 
-Perhaps a little code snippet.
-
-    use Project::Dragn;
-
-    my $foo = Project::Dragn->new();
-    ...
-
-=head1 EXPORT
-
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
-
-=head1 FUNCTIONS
-
-=head2 function1
-
-=cut
-
-sub function1 {
+has bdb_file => qw/is ro lazy_build 1/;
+sub _build_bdb_file {
+    return shift->path_mapper->file( 'run/dragn.bdb' );
 }
 
-=head2 function2
+has model_scope => qw/is rw/;
 
-=cut
+has model => qw/is ro lazy_build 1/;
+sub _build_model {
+    require KiokuDB;
+    my $self = shift;
+    my $bdb_file = $self->bdb_file;
+    $bdb_file->parent->mkpath unless -d $bdb_file;
+    my $model = KiokuDB->connect( "bdb:dir=$bdb_file", create => 1 );
+    $self->model_scope( $model->new_scope );
+    $model;
+}
 
-sub function2 {
+has path_mapper => qw/is ro lazy_build 1/, handles => [qw/ dir file /];
+sub _build_path_mapper {
+    require Path::Mapper;
+    my $self = shift;
+    return Path::Mapper->new( base => '.' );
+}
+
+has uri => qw/is rw lazy_build 1/;
+sub _build_uri {
+    require URI::PathAbstract;
+    return URI::PathAbstract->new( 'http://example.com' );
+}
+
+sub home {
+    return shift->home_dir( @_ );
+}
+
+sub home_dir {
+    return shift->path_mapper->dir( '/' );
+}
+
+sub populate {
+    my $self = shift;
+    Project::Dragn::Model->populate( $self );
 }
 
 =head1 AUTHOR

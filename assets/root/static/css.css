@@ -24,12 +24,19 @@ a:hover {
     padding: 2px;
 }
 
+ul li {
+    list-style-type: none;
+}
+
 #item-list li {
     float: left;
-    list-style-type: none;
     padding: 1em;
 }
 
 .clear {
     clear: both;
+}
+
+.selected {
+    font-weight: bold;
 }

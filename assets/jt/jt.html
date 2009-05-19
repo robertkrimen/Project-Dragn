@@ -1,21 +1,33 @@
 [% BLOCK applet %]
-<div class="applet">
-    <div id="toolbar">
-        <span id="copy-into">
-        </span>
-        <span id="move-into">
-        </span>
-        <button id="remove">Remove</button>
+<div class="applet yui-gf">
+    <div class="yui-u first">
+        <ul id="collection-list">
+        </ul>
     </div>
-    <ul id="item-list">
-    </ul>
-    <div class="clear"></div>
+    <div class="yui-u">
+        <div id="toolbar">
+            <span id="copy-into">
+            </span>
+            <span id="move-into">
+            </span>
+            <button id="remove">Remove</button>
+        </div>
+        <ul id="item-list">
+        </ul>
+        <div class="clear"></div>
+    </div>
 </div>
 [% END %]
 
 [% BLOCK item_list_item %]
 <li>
     <img src="[% uri %]/item/[% name %]/thumbnail.jpg">
+</li>
+[% END %]
+
+[% BLOCK collection_list_item %]
+<li>
+    <a href="#collection/[% name %]"><span id="collection-list-item-[% name %]" class="collection-list-item" >[% name %]</span></a>
 </li>
 [% END %]
 
