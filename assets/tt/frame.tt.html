@@ -1,7 +1,9 @@
 [% assets.include( "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js", -100 ) %]
-[% assets.include( "static/jquery.livequery.js", -100 ) %]
 [% assets.include( "http://yui.yahooapis.com/combo?2.7.0/build/reset-fonts-grids/reset-fonts-grids.css&2.7.0/build/base/base-min.css", 'css', -100 ) %]
 [% assets.include( "static/css.css", 0 ) %]
+
+[% assets.include( "static/jquery.livequery.js", -100 ) %]
+[% assets.include( "http://yui.yahooapis.com/combo?2.7.0/build/yahoo-dom-event/yahoo-dom-event.js&2.7.0/build/dragdrop/dragdrop-min.js", 'js', -100 ) %]
 
 [% DEFAULT title = template.title %]
 [% DEFAULT default_title = "" %]

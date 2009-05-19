@@ -919,7 +919,10 @@ Jemplate.templateMap['item_list_item'] = function(context) {
     var output = '';
 
     try {
-output += '\n<li>\n    <img src="';
+output += '\n<li id="item-list-item-';
+//line 23 "jt.html"
+output += stash.get('name');
+output += '">\n    <img src="';
 //line 24 "jt.html"
 output += stash.get('uri');
 output += '/item/';
